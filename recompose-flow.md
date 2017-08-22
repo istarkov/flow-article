@@ -43,6 +43,8 @@ In most cases all you need is to declare a props type of enhanced Component.
 Flow will infer all other types you need.
 
 ```javascript
+import React from 'react'
+import { compose, defaultProps, withProps } from 'recompose'
 import type { HOC } from 'recompose';
 
 type EnhancedComponentProps = {
@@ -81,7 +83,6 @@ If you want to play with this there is a fully typed [example project](https://g
 
 A lot of usefull information you can also get from  [tests](https://github.com/acdlite/recompose/tree/master/types/flow-typed/recompose_v0.24.x/flow_v0.53.x-)
 
-
 Sometimes it's needed to use recompose with React Class Components. You can use following helper to extract property type from enhancer.
 
 ```javascript
@@ -104,19 +105,24 @@ const MyEnhancedComponent = myEnhancer(MyComponent)
 
 ```
 
-What if you need to write your own enhancer.
-For simple enhancers just see [flow-documentation](https://flow.org/en/docs/react/hoc/)
+To write your own simple enhancer
+use [flow-documentation](https://flow.org/en/docs/react/hoc/)
 
-For class based enhacers see the example below.
+And for class based enhacers see the example below.
 
 ```javascript
+/* @flow */
+import * as React from 'react'
+import { compose, withProps } from 'recompose'
+import type { HOC } from 'recompose'
 // Example of very dirty written fetcher enhancer
 function fetcher<Response: {}, Base: {}>(
   dest: string,
-  obj: ?Response
-): HOC<{ ...$Exact<Base>, data: Response }, Base> {
+  nullRespType: ?Response
+): HOC<{ ...$Exact<Base>, data?: Response }, Base> {
   return BaseComponent =>
-    class Fetcher extends React.Component<Base, { data: Response }> {
+    class Fetcher extends React.Component<Base, { data?: Response }> {
+      state = { data: undefined }
       componentDidMount() {
         fetch(dest)
           .then(r => r.json())
@@ -127,12 +133,10 @@ function fetcher<Response: {}, Base: {}>(
       }
     }
 }
-
 // Enhanced Component props type
 type EnhancedCompProps = { b: number }
-
 // response type
-type FetchResponseType = { hello: string }
+type FetchResponseType = { hello: string, world: number }
 
 // Now you can use it, let's check
 const enhancer: HOC<*, EnhancedCompProps> = compose(
@@ -144,6 +148,10 @@ const enhancer: HOC<*, EnhancedCompProps> = compose(
   }))
 )
 ```
+
+Now flow will infer type of data so you can safely use it and with editor support even see it type
+
+![recompose-flow](./dataExample.png?raw=true)
 
 
 
