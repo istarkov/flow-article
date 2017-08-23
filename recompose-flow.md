@@ -43,6 +43,7 @@ In most cases all you need is to declare a props type of enhanced Component.
 Flow will infer all other types you need.
 
 ```javascript
+/* @flow */
 import React from 'react'
 import { compose, defaultProps, withProps } from 'recompose'
 import type { HOC } from 'recompose';
@@ -69,19 +70,21 @@ export default EnhancedComponent;
 
 You don't need to provide types for enhancers arguments, flow will infer them automatically.
 
-Just remove `defaultProps` in the example above and you would immediately get an error inside `withProps`
-`[flow] undefined (This type cannot be coerced to string)`
+Just remove `defaultProps` in the example above and you would immediately get a flow error
 
-The other wonderful feature is the ability of flow to infer types automatically,
+![[flow] undefined (This type cannot be coerced to string)](./error.png?raw=true)
+
+The other wonderful feature is the flow ability to infer types automatically,
 this makes expirience with recompose even more better than ever.
 
 See this in action.
 
 ![recompose-flow](https://user-images.githubusercontent.com/5077042/28116959-0c96ae2c-6714-11e7-930e-b1454c629908.gif)
 
-If you want to play with this there is a fully typed [example project](https://github.com/acdlite/recompose/tree/master/types/flow-example) of this [menu app](https://grader-meets-16837.netlify.com/)
+For me this feature is much more cool than error detection, as
+it allows to read and understand code much more faster.
 
-A lot of usefull information you can also get from  [tests](https://github.com/acdlite/recompose/tree/master/types/flow-typed/recompose_v0.24.x/flow_v0.53.x-)
+## Use recompose and flow with React Class Components
 
 Sometimes it's needed to use recompose with React Class Components. You can use following helper to extract property type from enhancer.
 
@@ -104,6 +107,8 @@ class MyComponent extends React.Component<MyComponentProps> {
 const MyEnhancedComponent = myEnhancer(MyComponent)
 
 ```
+
+## Write your own enhacers
 
 To write your own simple enhancer
 use [flow-documentation](https://flow.org/en/docs/react/hoc/)
@@ -149,25 +154,12 @@ const enhancer: HOC<*, EnhancedCompProps> = compose(
 )
 ```
 
-Now flow will infer type of data so you can safely use it and with editor support even see it type
+Now flow will infer type of `data` property so you can safely use it.
 
-![recompose-flow](./dataExample.png?raw=true)
+![data-type-example](./dataExample.png?raw=true)
 
+## Links
 
+Fully typed [example project](https://github.com/acdlite/recompose/tree/master/types/flow-example) of this [menu app](https://grader-meets-16837.netlify.com/)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Usage examples can be found in [tests](https://github.com/acdlite/recompose/tree/master/types/flow-typed/recompose_v0.24.x/flow_v0.53.x-)
