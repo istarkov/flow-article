@@ -126,7 +126,33 @@ const MyEnhancedComponent = myEnhancer(MyComponent)
 ## Write your own enhacers
 
 To write your own simple enhancer
-use [flow-documentation](https://flow.org/en/docs/react/hoc/)
+use [flow-documentation](https://flow.org/en/docs/react/hoc/) and you will get something like
+
+```javascript
+/* @flow */
+import * as React from 'react'
+import { compose, withProps } from 'recompose'
+import type { HOC } from 'recompose'
+
+function mapProps<BaseProps: {}, EnhancedProps>(
+  mapperFn: EnhancedProps => BaseProps
+): (React.ComponentType<BaseProps>) => React.ComponentType<EnhancedProps> {
+  return Component => props => <Component {...mapperFn(props)} />
+}
+
+// Test that all is fine
+type EnhancedProps = { hello: string }
+
+const enhancer: HOC<*, EnhancedProps> = compose(
+  mapProps(({ hello }) => ({
+    hello: `${hello} world`,
+    len: hello.length,
+  })),
+  withProps(props => ({
+    helloAndLen: `${props.hello} ${props.len}`,
+  }))
+)
+```
 
 And for class based enhacers see the example below.
 
@@ -153,6 +179,8 @@ function fetcher<Response: {}, Base: {}>(
       }
     }
 }
+
+// Test that all is fine
 // Enhanced Component props type
 type EnhancedCompProps = { b: number }
 // response type
@@ -172,6 +200,8 @@ const enhancer: HOC<*, EnhancedCompProps> = compose(
 Now flow will infer type of `data` property so you can safely use it.
 
 ![data-type-example](./dataExample.png?raw=true)
+
+
 
 ## Links
 
