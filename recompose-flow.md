@@ -48,6 +48,7 @@ import React from 'react'
 import { compose, defaultProps, withProps } from 'recompose'
 import type { HOC } from 'recompose';
 
+// type of Enhanced component props
 type EnhancedComponentProps = {
   text?: string,
 };
