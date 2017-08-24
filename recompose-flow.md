@@ -202,10 +202,14 @@ Now flow will infer type of `data` property so you can safely use it.
 
 ![data-type-example](./dataExample.png?raw=true)
 
-
-
 ## Links
 
 Fully typed [example project](https://github.com/acdlite/recompose/tree/master/types/flow-example) of this [menu app](https://grader-meets-16837.netlify.com/)
 
 Usage examples can be found in [tests](https://github.com/acdlite/recompose/tree/master/types/flow-typed/recompose_v0.24.x/flow_v0.53.x-)
+
+## PS
+
+Your turn Caleb ;-)
+
+![twitter](./twitter.png?raw=true)
