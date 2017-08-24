@@ -84,6 +84,21 @@ See this in action.
 For me this feature is much more cool than error detection, as
 it allows to read and understand code much more faster.
 
+Be sure all the magic above works fine for the most of recompose enhancers, but not for all. Any type system has it's own limitations, so for some enhancers you need to provide type information for every special case (no automatic type inference) or use our recommendations.
+
+These are:
+
+- `flattenProp`,`renameProp`, `renameProps` - recommendation is to replace with `withProps` in your code
+
+- `withReducer`, `withState` use `withStateHandlers`
+
+- `lifecycle` write your own enhancer instead, see the example below.
+
+- `mapPropsStream` see the [test](https://github.com/acdlite/recompose/blob/master/types/flow-typed/recompose_v0.24.x/flow_v0.53.x-/test_mapPropsStream.js) for example
+
+As an example how to type such enhacers see [test](
+https://github.com/acdlite/recompose/blob/master/types/flow-typed/recompose_v0.24.x/flow_v0.53.x-/test_voodoo.js)
+
 ## Use recompose and flow with React Class Components
 
 Sometimes it's needed to use recompose with React Class Components. You can use following helper to extract property type from enhancer.
