@@ -100,6 +100,8 @@ These are:
 As an example how to type such enhacers see [test](
 https://github.com/acdlite/recompose/blob/master/types/flow-typed/recompose_v0.24.x/flow_v0.53.x-/test_voodoo.js)
 
+Also we have an issue with `mapProps` enhancer, type inference works well but errors are not detected see the [test_mapProps](https://github.com/acdlite/recompose/blob/5c7f4d4ff2ccf1b71bb3089bca16d324d1249723/types/flow-typed/recompose_v0.24.x/flow_v0.53.x-/test_mapProps.js#L29) for details.
+
 ## Use recompose and flow with React Class Components
 
 Sometimes it's needed to use recompose with React Class Components. You can use following helper to extract property type from enhancer.
