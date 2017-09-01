@@ -1,4 +1,4 @@
-# Flow Support in Recompose
+# Flow support in Recompose
 
 ## History
 
@@ -97,7 +97,7 @@ For an example of how to type enhancers like this, see [this test](https://githu
 
 There is also a problem with the `mapProps` enhancer: type inference works well, but errors are not detected. See [test_mapProps](https://github.com/acdlite/recompose/blob/5c7f4d4ff2ccf1b71bb3089bca16d324d1249723/types/flow-typed/recompose_v0.24.x/flow_v0.53.x-/test_mapProps.js#L29) for details.
 
-## Use Recompose and Flow with React class components
+## Using Recompose and Flow with React class components
 
 Sometimes you need to use Recompose with React class components. You can use the following helper to extract the property type from an enhancer:
 
